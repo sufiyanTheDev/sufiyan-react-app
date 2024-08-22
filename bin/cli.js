@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 
-const { execSync } = require('child_process');
+const fs = require('fs-extra');
 const path = require('path');
-const fs = require('fs');
 
 const templateDir = path.resolve(__dirname, '../template');
 const projectName = process.argv[2];
@@ -19,19 +18,24 @@ if (fs.existsSync(targetDir)) {
     process.exit(1);
 }
 
-fs.mkdirSync(targetDir, { recursive: true });
+try {
+    fs.mkdirSync(targetDir, { recursive: true });
 
-// Copy template files, wrapping paths in quotes
-execSync(`cp -r "${templateDir}/." "${targetDir}"`, { stdio: 'inherit' });
+    // Copy template files
+    fs.copySync(templateDir, targetDir);
 
-console.log(`Project ${projectName} created.`);
+    console.log(`Project ${projectName} created.`);
 
-// Change to the project directory
-process.chdir(targetDir);
+    // Change to the project directory
+    process.chdir(targetDir);
 
-// Install dependencies
-console.log('Installing dependencies...');
-execSync('npm install', { stdio: 'inherit' });
+    // Install dependencies
+    console.log('Installing dependencies...');
+    require('child_process').execSync('npm install', { stdio: 'inherit' });
 
-console.log('Dependencies installed.');
-console.log(`Your project is ready! Navigate to ${projectName} and start developing.`);
+    console.log('Dependencies installed.');
+    console.log(`Your project is ready! Navigate to ${projectName} and start developing.`);
+} catch (error) {
+    console.error('An error occurred:', error.message);
+    process.exit(1);
+}
