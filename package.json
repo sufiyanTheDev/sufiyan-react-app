@@ -1,6 +1,6 @@
 {
   "name": "sufiyan-react-app",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Basic Template of running a react Application",
   "main": "bin/cli.js",
   "bin": {
