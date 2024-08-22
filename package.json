@@ -1,0 +1,20 @@
+{
+  "name": "sufiyan-react-app",
+  "version": "1.0.1",
+  "description": "Basic Template of running a react Application",
+  "main": "bin/cli.js",
+  "bin": {
+    "sufiyan-react-app": "bin/cli.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react",
+    "cli",
+    "template",
+    "create-app"
+  ],
+  "author": "SufiyanTheDev",
+  "license": "ISC"
+}
